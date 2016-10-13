@@ -1,10 +1,10 @@
 "use strict";
 var path = require('path');
-var debug = require('debug')('nightmare:iframe');
+var debug = require('debug')('nightmare:utils');
 
 module.exports = exports = function(Nightmare) {
 	Nightmare.action('tableExtract', function(id, columns, separator, done){
-		this.evaluate_now(function(id, columns, separator) {
+		this.evaluate_now(function(id, columns, separator, debug) {
 			var trs = document.querySelectorAll(id);
 			var colrx = /(?:([0-9]+)(?:-)([0-9]+))|([0-9]+)/g
 			var cols = columns.match(colrx).map(function(e){
@@ -18,16 +18,19 @@ module.exports = exports = function(Nightmare) {
 					}(rarr[0],rarr[1]));
 				}
 				else
-					return parseInt(elem);
+					return parseInt(e);
 			}).sort();
 			cols = [].concat.apply([], cols);
 
-			return Object.keys(trs).map(function (k) {
+			var fstr = Object.keys(trs).map(function (k) {
 				var estr = "";
 				for(var i=0;i<cols.length;i++)
-					estr += trs[k].getElementByTagName('td')[cols[i]].innerText + separator;
+					estr += trs[k].getElementsByTagName('td')[cols[i]].innerText + separator;
 				return estr.trim();
 			});
-		}, done)
+			alert(fstr);
+			return fstr;
+		}, done, id, columns, separator, debug);
+		debug('end tableExtract...');
 	});
 };
