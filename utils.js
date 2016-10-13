@@ -1,9 +1,10 @@
 "use strict";
 var path = require('path');
+   debug = require('debug')('nightmare:iframe');
 
 module.exports = exports = function(Nightmare) {
 	Nightmare.action('tableExtract', function(id, columns, separator, done){
-		this.evaluate_now(function() {
+		this.evaluate_now(function(id, columns, separator) {
 			var trs = document.querySelectorAll(id);
 			var colrx = /(?:([0-9]+)(?:-)([0-9]+))|([0-9]+)/g
 			var cols = columns.match(colrx).map(function(e){
