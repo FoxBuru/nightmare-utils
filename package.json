@@ -1,0 +1,23 @@
+{
+  "name": "nightmare-utils",
+  "version": "0.0.1",
+  "description": "Some hacky utils for extracting info easily",
+  "main": "utils.js",
+  "keywords": [
+    "nightmare",
+    "phantomjs",
+    "utils",
+  ],
+  "author": "Iván de Gyves",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/FoxBuru/nightmare-utils.git"
+  },
+  "peerDependencies":{
+    "nightmare": "^2.3.0"
+  },
+  "dependencies": {
+    "debug": "^2.2.0"
+  },
+  "license": "MIT"
+}
