@@ -1,6 +1,6 @@
 "use strict";
 var path = require('path');
-   debug = require('debug')('nightmare:iframe');
+var debug = require('debug')('nightmare:iframe');
 
 module.exports = exports = function(Nightmare) {
 	Nightmare.action('tableExtract', function(id, columns, separator, done){
